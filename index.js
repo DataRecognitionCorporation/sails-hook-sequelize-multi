@@ -16,7 +16,7 @@ module.exports = function(sails) {
       if (connection.options == null) {
         connection.options = {};
       }
-      cxn.options.logging = cxn.options.logging || sails.log.verbose;
+      connection.options.logging = connection.options.logging || sails.log.verbose;
       migrate = sails.config.models.migrate;
       sails.log.verbose("Migration: " + migrate);
       sequelize = new Sequelize(connection.database, connection.user, connection.password, connection.options);
