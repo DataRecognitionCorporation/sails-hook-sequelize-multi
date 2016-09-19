@@ -1,7 +1,7 @@
 {
-  "name": "sails-hook-sequelize",
-  "version": "1.0.1",
-  "description": "Sails.js hook to use sequelize ORM",
+  "name": "sails-hook-sequelize-multi",
+  "version": "1.0.2",
+  "description": "Sails.js hook to use sequelize ORM, multiple connection version",
   "main": "index.js",
   "sails": {
     "isHook": true
@@ -33,10 +33,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:festo/sails-hook-sequelize.git"
+    "url": "git@github.com:patchu/sails-hook-sequelize-multi.git"
   },
   "bugs": {
-    "url": "https://github.com/festo/sails-hook-sequelize/issues"
+    "url": "https://github.com/patchu/sails-hook-sequelize-multi/issues"
   },
-  "homepage": "https://github.com/festo/sails-hook-sequelize"
+  "homepage": "https://github.com/patchu/sails-hook-sequelize-multi"
 }
+
+
