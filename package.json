@@ -1,6 +1,6 @@
 {
   "name": "sails-hook-sequelize-multi",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Sails.js hook to use sequelize ORM, multiple connection version",
   "main": "index.js",
   "sails": {
@@ -40,5 +40,3 @@
   },
   "homepage": "https://github.com/patchu/sails-hook-sequelize-multi"
 }
-
-
