@@ -89,16 +89,63 @@ No changes to the model code are necessary -- declare the models as you normally
 ## How to use
 
 Initially, all your existing code will work the same as before.
-For instance, in the example below
+By default, your Sequelize code will use the default database that you've declared in
+the `app/config/models.js` file (see above).
+
+For instance, the example below should look very similar to your existing code:
 
 ```javascript
-UserTable.find(option).then(function(res) {
-  // do something
+UserTable.find(option)
+.then(function(res) {
   console(res);
 }).catch(function(err) {
-  return console(error);
+  console(err);
 });
 ```
+
+However, if you'd like to target a specific database, you can declare that right after the table name:
+
+```javascript
+UserTable.staging.find(option)
+.then(function(res) {
+  console(res);
+}).catch(function(err) {
+  console(err);
+});
+```
+
+or
+
+```javascript
+var dbname = 'staging';    // db name is set elsewhere in the code
+
+UserTable[dbname].find(option)
+.then(function(res) {
+  console(res);
+}).catch(function(err) {
+  console(err);
+});
+```
+
+This also works if you're using the `sequelize` object to execute raw queries
+
+```javascript
+var dbname = 'production';    // db name is set elsewhere in the code
+var sqlString = 'SELECT getdate()';
+
+sequelize[dbname].query(sqlString)
+.then(function(res) {
+  console(res);
+}).catch(function(err) {
+  console(err);
+});
+```
+
+## Caveats
+
+At the moment, associations do not work for the "extra" databases. In the example above,
+the "production" tables would have associations, but the "staging" tables are not because
+they are not the default. This will be addressed in a future version.
 
 #License
 [MIT](./LICENSE)
