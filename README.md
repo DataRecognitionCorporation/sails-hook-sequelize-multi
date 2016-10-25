@@ -86,7 +86,7 @@ module.exports.models = {
 
 No changes to the model code are necessary -- declare the models as you normally do.
 
-## How to use
+# How to use
 
 Initially, all your existing code will work the same as before.
 By default, your Sequelize code will use the default database that you've declared in
@@ -141,7 +141,7 @@ sequelize[dbname].query(sqlString)
 });
 ```
 
-## Caveats
+# Caveats
 
 At the moment, associations do not work for the "extra" databases. In the example above,
 the "production" tables would have associations, but the "staging" tables are not because
