@@ -1,16 +1,15 @@
-# sails-hook-sequelize
-Sails.js hook to use sequelize ORM
+# sails-hook-sequelize-multi
 
-[![Build Status](https://travis-ci.org/festo/sails-hook-sequelize.svg?branch=master)](https://travis-ci.org/festo/sails-hook-sequelize)
-[![npm version](https://badge.fury.io/js/sails-hook-sequelize.svg)](http://badge.fury.io/js/sails-hook-sequelize)
+This is a fork of the [sails-hook-sequelize](https://github.com/festo/sails-hook-sequelize)
+project, expanded to support multiple databases and connections. It's a quick and dirty
+implementation.
 
-
-#Install
+# Install
 
 Install this hook with:
 
 ```sh
-$ npm install sails-hook-sequelize --save
+$ npm install sails-hook-sequelize-multi --save
 ```
 
 # Configuration
@@ -25,52 +24,80 @@ $ npm install sails-hook-sequelize --save
 }
 ```
 
-## Connections
-Sequelize connection
+## Connections files
+
+In the `app/config/connections.js` file, list all the connections that you're going to use.
+
 ```javascript
-somePostgresqlServer: {
-  user: 'postgres',
-  password: '',
-  database: 'sequelize',
-  dialect: 'postgres',
-  options: {
-    dialect: 'postgres',
-    host   : 'localhost',
-    port   : 5432,
-    logging: console.log
+module.exports.connections = {
+  staging: {
+    user: 'stagingUser'
+    password: 'abcd'
+    database: 'staging_db'
+    options: {
+      host: 'staging.example.com'
+      dialect: 'mssql'
+      pool: {
+        max: 5,
+        min: 0,
+        idle: 1000
+      },
+      isolationLevel: 'READ UNCOMMITTED'
+    }
+  },
+  production: {
+    user: 'prodUser'
+    password: 'abcd'
+    database: 'production_db'
+    options: {
+      host: 'prod.example.com'
+      dialect: 'mssql'
+      pool: {
+        max: 5,
+        min: 0,
+        idle: 1000
+      },
+      isolationLevel: 'READ UNCOMMITTED'
+    }
   }
-}
+};
+```
+
+## Models config
+
+In the `app/config/models.js` file, declare the model that you'd like to use as the default.
+For example to use the `staging` database as the default for the connections file above:
+
+```javascript
+module.exports.models = {
+  connection: 'staging'
+};
+```
+
+Or, to use the `production` database as the default:
+
+```javascript
+module.exports.models = {
+  connection: 'production'
+};
 ```
 
 ## Models
-Sequelize model definition
-`models/user.js`
+
+No changes to the model code are necessary -- declare the models as you normally do.
+
+## How to use
+
+Initially, all your existing code will work the same as before.
+For instance, in the example below
+
 ```javascript
-module.exports = {
-  attributes: {
-    name: {
-      type: Sequelize.STRING,
-      allowNull: false
-    },
-    age: {
-      type: Sequelize.INTEGER
-    }
-  },
-  associations: function() {
-    user.hasMany(image, {
-      foreignKey: {
-        name: 'owner',
-        allowNull: false
-      }
-    });
-  },
-  options: {
-    tableName: 'user',
-    classMethods: {},
-    instanceMethods: {},
-    hooks: {}
-  }
-};
+UserTable.find(option).then(function(res) {
+  // do something
+  console(res);
+}).catch(function(err) {
+  return console(error);
+});
 ```
 
 #License
