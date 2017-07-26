@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "continuation-local-storage": "^3.1.4",
-    "sequelize": "^3.5.1"
+    "sequelize": "git+ssh://git@github.com/DataRecognitionCorporation/sequelize.git#bug/mssql_end_bug"
   },
   "directories": {
     "test": "test"
